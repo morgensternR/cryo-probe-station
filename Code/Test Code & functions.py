@@ -1,6 +1,6 @@
 # Create a plane using 3 points (x,y,z)
 # Plane Eq: Ax + By + Cz = D
-# [A, B, C] are normal vectors to the plane
+# [A, B, C] are normal vector coeff to the plane
 # [D] is the dot product of the normal vector with any one of the input position point vectors (X_n, Y_n, Z_n)
 #Steps:
     # 1. Give 3 x (X_n, Y_n, Z_n) coordinates as the input
@@ -15,8 +15,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def conv_points_to_plane_eq(ref1, ref2, ref3):
-    ref_list = [ref1, ref2, ref3]
-    for ref in ref_list:
+    ref_array = np.array([ref1, ref2, ref3])
+    for ref in ref_array:
         if ref.size != 3:
             raise Exception('3D point must have 3 Params "X,Y,Z"')
     ref_vec1 = ref2 - ref1
@@ -28,9 +28,9 @@ def conv_points_to_plane_eq(ref1, ref2, ref3):
     
     plane_eq_coeff = np.array([A, B, C, D])
 
-    return  plane_eq_coeff, ref_list
+    return  plane_eq_coeff, ref_array
     
-def plot_plane(plane_eq_coeff, ref_list = None, mesh_count = 10):
+def plot_plane(plane_eq_coeff, ref_array= None, mesh_count = 10):
     #Check for proper size of params for Plane Eq
     if plane_eq_coeff.size != 4:
         raise Exception('Plane equation must include 3 Params [A, B, C, D] = Ax + By + Cz = D')
@@ -39,7 +39,7 @@ def plot_plane(plane_eq_coeff, ref_list = None, mesh_count = 10):
     fig = plt.figure()
     
     #Generate X and y mesh grid points with mech_counts amount
-    xx, yy = np.meshgrid(range(mesh_count), range(mesh_count))
+    xx, yy = np.meshgrid(range(-mesh_count, mesh_count), range(-mesh_count, mesh_count))
     #Generate array of points Z points of plane for plotting
     z = (plane_eq_coeff[3] - plane_eq_coeff[0] * xx - plane_eq_coeff[1] * yy) / plane_eq_coeff[3]
     
@@ -50,13 +50,17 @@ def plot_plane(plane_eq_coeff, ref_list = None, mesh_count = 10):
     ax.plot_surface(xx, yy, z, alpha=0.5)
     
     #Plot input points
-    if ref_list != None:
-        ax.scatter(ref_list)
+    if isinstance(ref_array, np.ndarray):
+        ax.scatter(xs = ref_array[:,0], ys = ref_array[:,1], zs = ref_array[:,2])
     plt.show()
-
+    return z
+#%%
 #Simulate Refeerence points given from Stepper positions 
 #
 
-point1 = np.array([ , , ])
-point2 = np.array([ , , ])
-point3 = np.array([ , , ])
+point1 = np.array([-50 ,-50, 1])
+point2 = np.array([50 , 50, 1])
+point3 = np.array([50 , -50, 1])
+
+plane_coeff, ref_array = conv_points_to_plane_eq(point1, point2, point3)
+z = plot_plane(plane_coeff,  ref_array = ref_array,  mesh_count = 50)
