@@ -39,7 +39,9 @@ def plot_plane(plane_eq_coeff, ref_array= None, mesh_count = 10):
     fig = plt.figure()
     
     #Generate X and y mesh grid points with mech_counts amount
-    xx, yy = np.meshgrid(range(-mesh_count, mesh_count), range(-mesh_count, mesh_count))
+    x_grid = np.linspace(-mesh_count, mesh_count, int(mesh_count*1e2))
+    y_grid = np.linspace(-mesh_count, mesh_count, int(mesh_count*1e2))
+    xx, yy = np.meshgrid(x_grid, y_grid)
     #Generate array of points Z points of plane for plotting
     z = (plane_eq_coeff[3] - plane_eq_coeff[0] * xx - plane_eq_coeff[1] * yy) / plane_eq_coeff[3]
     
@@ -58,9 +60,23 @@ def plot_plane(plane_eq_coeff, ref_array= None, mesh_count = 10):
 #Simulate Refeerence points given from Stepper positions 
 #
 
-point1 = np.array([-50 ,-50, 1])
-point2 = np.array([50 , 50, 1])
-point3 = np.array([50 , -50, 1])
+point1 = np.array([0 ,0, 1])
+point2 = np.array([25 , 25, 1])
+point3 = np.array([25 , -25, 1])
 
 plane_coeff, ref_array = conv_points_to_plane_eq(point1, point2, point3)
-z = plot_plane(plane_coeff,  ref_array = ref_array,  mesh_count = 50)
+z = plot_plane(plane_coeff,  ref_array = ref_array,  mesh_count = 25)
+
+#%%
+
+#Goal: Using grid coordi9nates, correleate those to stepper locations. Subtract known physical offsets of probe center to each stepper axis
+#1. Input coordinate "ref" [x,y,z]. This is where you want the probe head to go
+#2. Remove/add offsets to translate probe head locaiton to stepper location
+#3. return coords to use with stepper functions
+# X Axis
+# X Axis is expected to fault out at 100mm, this is out starting point
+#
+#
+
+def remove_probe_offsets(ref, y_stage_offset = 1.5 , x_stage_offset, z_stage_offset, y_probe, x_probe, y_probe, z_probe):
+    
