@@ -1,0 +1,12 @@
+Comment,Designator,Footprint,LCSC
+Conn_01x04_Socket,"J2,J3,J4,J5,J6",PinSocket_1x04_P2.54mm_Vertical,C2718488
+DB25_Plug,J1,DB25-TH_FDB2501-M0DB300K6KA,C2834344
+Conn_01x02_Socket,"J7,J8",PinSocket_1x02_P2.54mm_Vertical,C2935896
+MountingHole_Pad,H8,MountingHole_5mm_Pad,
+MountingHole_Pad,H7,MountingHole_5mm_Pad,
+MountingHole_Pad,H6,MountingHole_5mm_Pad,
+MountingHole_Pad,H5,MountingHole_5mm_Pad,
+MountingHole_Pad,H4,MountingHole_5mm_Pad,
+MountingHole_Pad,H3,MountingHole_5mm_Pad,
+MountingHole_Pad,H2,MountingHole_5mm_Pad,
+MountingHole_Pad,H1,MountingHole_5mm_Pad,

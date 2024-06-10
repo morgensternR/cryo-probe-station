@@ -1,4 +1,0 @@
-(fp_lib_table
-  (version 7)
-  (lib (name "Stepper_Feedthrough")(type "KiCad")(uri "${KIPRJMOD}/Footprint & Symbols/footprints.pretty/Stepper_Feedthrough.pretty")(options "")(descr ""))
-)
