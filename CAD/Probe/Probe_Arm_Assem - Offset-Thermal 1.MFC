@@ -1,0 +1,8 @@
+[StartTime]
+Probe_Arm_Assem - Offset-Thermal 1.MFC=
+[SolverState]
+Probe_Arm_Assem - Offset-Thermal 1.MFC=2
+[ShowMin]
+Probe_Arm_Assem - Offset-Thermal 1.MFC=yes
+[StudyType]
+Probe_Arm_Assem - Offset-Thermal 1.MFC=-1
